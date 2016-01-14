@@ -1,0 +1,32 @@
+{
+  "name": "abp-resources",
+  "homepage": "http://www.aspnetboilerplate.com/",
+  "authors": [
+    "Halil İbrahim Kalkan"
+  ],
+  "description": "Bower package with script and style resources for ASP.NET Boilerplate.",
+  "main": "scripts/abp.js",
+  "moduleType": [],
+  "keywords": [
+    "asp.net",
+    "boilerplate",
+    "mvc",
+    "application",
+    "web",
+    "framework",
+    "domain",
+    "driven",
+    "design",
+    "dependency",
+    "injection",
+    "resources"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
