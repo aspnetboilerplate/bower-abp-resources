@@ -1,0 +1,40 @@
+{
+  "name": "abp-resources",
+  "version": "0.7.8",
+  "description": "ASP.NET Boilerplate javascripts",
+  "main": "Abp/Framework/scripts/abp.js",
+  "dependencies": {},
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.0",
+    "gulp-shell": "^0.5.2",
+    "xml2js": "^0.4.16"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stromsky/bower-abp-resources.git"
+  },
+  "keywords": [
+    "asp.net",
+    "boilerplate",
+    "mvc",
+    "application",
+    "web",
+    "framework",
+    "domain",
+    "driven",
+    "design",
+    "dependency",
+    "injection",
+    "resources"
+  ],
+  "author": "Halil İbrahim Kalkan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stromsky/bower-abp-resources/issues"
+  },
+  "homepage": "https://github.com/stromsky/bower-abp-resources#readme"
+}
