@@ -4,8 +4,9 @@
   "authors": [
     "Halil İbrahim Kalkan"
   ],
-  "description": "Bower package with script and style resources for ASP.NET Boilerplate.",
-  "main": "scripts/abp.js",
+  "version": "0.7.8",
+  "description": "Script and style resources for ASP.NET Boilerplate.",
+  "main": "Abp/Framework/scripts/abp.js",
   "moduleType": [],
   "keywords": [
     "asp.net",
