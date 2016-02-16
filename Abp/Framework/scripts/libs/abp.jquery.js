@@ -1,4 +1,4 @@
-var abp = abp || {};
+﻿var abp = abp || {};
 (function ($) {
 
     if (!$) {
@@ -46,7 +46,7 @@ var abp = abp || {};
             if (error.details) {
                 return abp.message.error(error.details, error.message);
             } else {
-                return abp.message.error(error.message);
+                return abp.message.error(error.message || abp.ajax.defaultError.message);
             }
         },
 
