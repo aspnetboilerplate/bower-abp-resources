@@ -13,6 +13,13 @@
         userOptions = userOptions || {};
 
         var options = $.extend(true, {}, abp.ajax.defaultOpts, userOptions);
+        
+        options.beforeSend = function(xhr) {
+           xhr.setRequestHeader("Pragma", "no-cache");
+           xhr.setRequestHeader("Cache-Control", "no-cache");
+           xhr.setRequestHeader("If-Modified-Since", "Wed, 21 Oct 2020 07:28:00 GMT");
+        };
+        
         options.success = undefined;
         options.error = undefined;
 
