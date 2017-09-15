@@ -707,7 +707,7 @@
      * @param {Date} expireDate (optional). If not specified the cookie will expire at the end of session.
      * @param {string} path (optional)
      */
-    abp.utils.setCookieValue = function (key, value, expireDate, path) {
+    abp.utils.setCookieValue = function (key, value, expireDate, path, domain) {
         var cookieValue = encodeURIComponent(key) + '=';
 
         if (value) {
@@ -720,6 +720,10 @@
 
         if (path) {
             cookieValue = cookieValue + "; path=" + path;
+        }
+
+        if (domain) {
+            cookieValue = cookieValue + "; domain=" + domain;
         }
 
         document.cookie = cookieValue;
