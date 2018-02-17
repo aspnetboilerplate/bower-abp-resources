@@ -361,9 +361,9 @@
         * @param {string} key
         * @param {string} value 
         * @param {Date} expireDate (optional). If not specified the cookie will expire at the end of session.
-        * @param {string} path (optional)
+        * @param {string} domain (optional)
         */
-        function setCookieValue(key: string, value: string, expireDate?: Date, path?: string): void;
+        function setCookieValue(key: string, value: string, expireDate?: Date, path?: string, domain?: string): void;
 
         /**
         * Gets a cookie with given key.
