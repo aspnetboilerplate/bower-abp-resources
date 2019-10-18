@@ -12,21 +12,6 @@
             details: 'Error detail not sent by server.'
         },
 
-        defaultError401: {
-            message: 'You are not authenticated!',
-            details: 'You should be authenticated (sign in) in order to perform this operation.'
-        },
-
-        defaultError403: {
-            message: 'You are not authorized!',
-            details: 'You are not allowed to perform this operation.'
-        },
-
-        defaultError404: {
-            message: 'Resource not found!',
-            details: 'The resource requested could not be found on the server.'
-        },
-
         logError: function (error) {
             abp.log.error(error);
         },
@@ -40,44 +25,24 @@
         },
 
         handleTargetUrl: function (targetUrl) {
-            if (!targetUrl) {
-                location.href = abp.appPath;
-            } else {
-                location.href = targetUrl;
-            }
-        },
-
-        handleNonAbpErrorResponse: function (response, defer) {
-            if (response.config.abpHandleError !== false) {
-                switch (response.status) {
-                    case 401:
-                        abp.ng.http.handleUnAuthorizedRequest(
-                            abp.ng.http.showError(abp.ng.http.defaultError401),
-                            abp.appPath
-                        );
-                        break;
-                    case 403:
-                        abp.ng.http.showError(abp.ajax.defaultError403);
-                        break;
-                    case 404:
-                        abp.ng.http.showError(abp.ajax.defaultError404);
-                        break;
-                    default:
-                        abp.ng.http.showError(abp.ng.http.defaultError);
-                        break;
-                }
-            }
-
-            defer.reject(response);
+            location.href = targetUrl;
         },
 
         handleUnAuthorizedRequest: function (messagePromise, targetUrl) {
             if (messagePromise) {
                 messagePromise.done(function () {
-                    abp.ng.http.handleTargetUrl(targetUrl || abp.appPath);
+                    if (!targetUrl) {
+                        location.reload();
+                    } else {
+                        abp.ng.http.handleTargetUrl(targetUrl);
+                    }
                 });
             } else {
-                abp.ng.http.handleTargetUrl(targetUrl || abp.appPath);
+                if (!targetUrl) {
+                    location.reload();
+                } else {
+                    abp.ng.http.handleTargetUrl(targetUrl);
+                }
             }
         },
 
@@ -95,9 +60,7 @@
                 var messagePromise = null;
 
                 if (originalData.error) {
-                    if (response.config.abpHandleError !== false) {
-                        messagePromise = abp.ng.http.showError(originalData.error);
-                    }
+                    messagePromise = abp.ng.http.showError(originalData.error);
                 } else {
                     originalData.error = defaultError;
                 }
@@ -107,7 +70,7 @@
                 response.data = originalData.error;
                 defer.reject(response);
 
-                if (response.status == 401 && response.config.abpHandleError !== false) {
+                if (originalData.unAuthorizedRequest) {
                     abp.ng.http.handleUnAuthorizedRequest(messagePromise, originalData.targetUrl);
                 }
             } else { //not wrapped result
@@ -134,7 +97,6 @@
 
                     'response': function (response) {
                         if (!response.data || !response.data.__abp) {
-                            //Non ABP related return value
                             return response;
                         }
 
@@ -144,14 +106,13 @@
                     },
 
                     'responseError': function (ngError) {
-                        var defer = $q.defer();
-
                         if (!ngError.data || !ngError.data.__abp) {
-                            abp.ng.http.handleNonAbpErrorResponse(ngError, defer);
-                        } else {
-                            abp.ng.http.handleResponse(ngError, defer);
+                            abp.ng.http.showError(abp.ng.http.defaultError);
+                            return ngError;
                         }
 
+                        var defer = $q.defer();
+                        abp.ng.http.handleResponse(ngError, defer);
                         return defer.promise;
                     }
 
@@ -163,12 +124,6 @@
     abp.event.on('abp.dynamicScriptsInitialized', function () {
         abp.ng.http.defaultError.message = abp.localization.abpWeb('DefaultError');
         abp.ng.http.defaultError.details = abp.localization.abpWeb('DefaultErrorDetail');
-        abp.ng.http.defaultError401.message = abp.localization.abpWeb('DefaultError401');
-        abp.ng.http.defaultError401.details = abp.localization.abpWeb('DefaultErrorDetail401');
-        abp.ng.http.defaultError403.message = abp.localization.abpWeb('DefaultError403');
-        abp.ng.http.defaultError403.details = abp.localization.abpWeb('DefaultErrorDetail403');
-        abp.ng.http.defaultError404.message = abp.localization.abpWeb('DefaultError404');
-        abp.ng.http.defaultError404.details = abp.localization.abpWeb('DefaultErrorDetail404');
     });
 
 })((abp || (abp = {})), (angular || undefined));
