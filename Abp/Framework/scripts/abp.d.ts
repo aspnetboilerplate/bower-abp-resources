@@ -1,4 +1,4 @@
-declare namespace abp {
+﻿declare namespace abp {
 
     let appPath: string;
 
@@ -82,7 +82,7 @@ declare namespace abp {
 
         function localize(key: string, sourceName: string): string;
 
-        function getSource(sourceName: string): (key: string) => string;
+        function getSource(sourceName: string): (...key: string[]) => string;
 
         function isCurrentCulture(name: string): boolean;
     }
@@ -215,7 +215,7 @@ declare namespace abp {
             READ
         }
 
-        //TODO: We can extend this interface to define built-in notification types, like ILocalizableMessageNotificationData 
+        //TODO: We can extend this interface to define built-in notification types, like ILocalizableMessageNotificationData
         interface INotificationData {
 
             type: string;
@@ -372,7 +372,7 @@ declare namespace abp {
         * This is a simple implementation created to be used by ABP.
         * Please use a complete cookie library if you need.
         * @param {string} key
-        * @param {string} value 
+        * @param {string} value
         * @param {Date} expireDate (optional). If not specified the cookie will expire at the end of session.
         * @param {string} path (optional)
         */
