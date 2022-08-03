@@ -59,20 +59,20 @@ var abp = abp || {};
         });
     };
 
-    abp.message.info = function (message, title, callback, options) {
-        return showMessage('info', message, title, callback, options);
+    abp.message.info = function (message, title, options) {
+        return showMessage('info', message, title, null, options);
     };
 
-    abp.message.success = function (message, title, callback, options) {
-        return showMessage('success', message, title, callback, options);
+    abp.message.success = function (message, title, options) {
+        return showMessage('success', message, title, null, options);
     };
 
-    abp.message.warn = function (message, title, callback, options,) {
-        return showMessage('warn', message, title, callback, options);
+    abp.message.warn = function (message, title, options) {
+        return showMessage('warn', message, title, null, options);
     };
 
-    abp.message.error = function (message, title, callback, options) {
-        return showMessage('error', message, title, callback, options);
+    abp.message.error = function (message, title, options) {
+        return showMessage('error', message, title, null, options);
     };
 
     abp.message.confirm = function (message, title, callback, options) {
