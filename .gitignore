@@ -124,3 +124,4 @@ src/.vs/config/applicationhost.config
 
 # Node.js dependencies
 node_modules/
+.npmrc
